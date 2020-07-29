@@ -2,8 +2,9 @@
 extern crate log;
 extern crate simple_logger;
 
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
 fn main() {
     simple_logger::init().expect("Cannot initialize logging");
-    info!("Grab images v");
-    println!("Hello, world!");
+    info!("Grab Images version {}", VERSION);
 }
