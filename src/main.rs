@@ -2,6 +2,7 @@
 extern crate log;
 extern crate simple_logger;
 
+use std::fs;
 use std::path::PathBuf;
 use structopt::StructOpt;
 
@@ -21,5 +22,10 @@ fn main() {
     println!("{:?}", opt);
     info!("Grab Images version {}", VERSION);
 
+    let input_txt = fs::read_to_string(opt.input_list).unwrap();
+    let lines = input_txt.lines();
 
+    for line in lines {
+        println!("Line {}", line);
+    }
 }
