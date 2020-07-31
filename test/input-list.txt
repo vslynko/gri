@@ -1,1 +1,3 @@
-C:\Users\vadim\Documents\*
+src/**/*.{ico,svg}
+input-list.txt
+C:/*
