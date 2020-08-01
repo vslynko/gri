@@ -59,12 +59,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::path::Path;
 
     #[test]
     fn find_jpegs() {
         simple_logger::init().expect("Cannot initialize logging");
 
-        let base_path = "tests/test_root/";
+        let base_path = Path::new("tests/test_root/").canonicalize().expect("wrong base path");
+        let base_path = base_path.to_str().expect("wrong base path");
         let mut sources = Vec::new();
         sources.push(base_path);
         let images = unwind_glob_sources(sources);
