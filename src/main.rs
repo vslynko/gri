@@ -65,10 +65,15 @@ mod tests {
     fn find_jpegs() {
         simple_logger::init().expect("Cannot initialize logging");
 
-        let base_path = Path::new("tests/test_root/").canonicalize().expect("wrong base path");
-        let base_path = base_path.to_str().expect("wrong base path");
+        let test_paths = ["tests/test_root/folder1", "tests/test_root/folder2"];
         let mut sources = Vec::new();
-        sources.push(base_path);
+
+        for pth in test_paths.iter() {
+            let bp = Path::new(pth).canonicalize().expect("wrong base path");
+            let bpstr = bp.into_os_string().to_str().expect("wronge base path");
+            sources.push(bpstr);
+        }
+        
         let images = unwind_glob_sources(sources);
 
         assert_eq!(images.len(), 3);
