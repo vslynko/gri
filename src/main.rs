@@ -55,3 +55,20 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     return Ok(());
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn find_jpegs() {
+        simple_logger::init().expect("Cannot initialize logging");
+
+        let base_path = "tests/test_root/";
+        let mut sources = Vec::new();
+        sources.push(base_path);
+        let images = unwind_glob_sources(sources);
+
+        assert_eq!(images.len(), 3);
+    }
+}
