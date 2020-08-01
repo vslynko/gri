@@ -9,7 +9,7 @@ use std::fs;
 use std::path::PathBuf;
 use structopt::StructOpt;
 
-const FILE_TYPES_GLOB: &'static str = "*.jpg";
+const FILE_TYPES_GLOB: &'static str = "*.{jpg,cr2,tiff}";
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn unwind_glob_sources(sources: Vec<&str>) -> Vec<PathBuf> {
