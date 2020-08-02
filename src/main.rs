@@ -66,16 +66,14 @@ mod tests {
         simple_logger::init().expect("Cannot initialize logging");
 
         let test_paths = ["tests/test_root/folder1", "tests/test_root/folder2"];
-        let mut sources = Vec::new();
+        let paths: Vec<PathBuf> = test_paths
+            .iter()
+            .map(|tp| Path::new(tp).canonicalize().expect("wrong base path"))
+            .collect();
+        let sources = paths.iter().map(|pp| pp.to_str().unwrap()).collect();
 
-        for pth in test_paths.iter() {
-            let bp = Path::new(pth).canonicalize().expect("wrong base path");
-            let bpstr = bp.into_os_string().to_str().expect("wronge base path");
-            sources.push(bpstr);
-        }
-        
         let images = unwind_glob_sources(sources);
 
-        assert_eq!(images.len(), 3);
+        assert_eq!(images.len(), 4);
     }
 }
